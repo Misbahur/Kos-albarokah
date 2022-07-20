@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cabang;
 use Illuminate\Http\Request;
 
-class CabangController extends Controller
+class DashboardAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class CabangController extends Controller
     public function index()
     {
         //
-        return view('');
+        return view('pages.admin.dashboardadmin');
     }
 
     /**
@@ -42,10 +41,10 @@ class CabangController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cabang  $cabang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cabang $cabang)
+    public function show($id)
     {
         //
     }
@@ -53,10 +52,10 @@ class CabangController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cabang  $cabang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cabang $cabang)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +64,10 @@ class CabangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cabang  $cabang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cabang $cabang)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +75,10 @@ class CabangController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cabang  $cabang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cabang $cabang)
+    public function destroy($id)
     {
         //
     }

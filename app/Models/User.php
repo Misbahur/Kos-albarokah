@@ -42,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function hasRole(string $role): bool
+    {
+        return $this->getAttribute('role') === $role;
+    }
+
     public function transaksis()
     {
         return $this->hasOne('App\Models\Transaksi', 'users_id');

@@ -15,8 +15,18 @@ class TransaksiController extends Controller
     public function index()
     {
         //
+        return view('pages.pembayaran');
     }
 
+    public function carabayar()
+    {
+        return view('pages.carapembayaran');
+    }
+
+    public function metodebayar()
+    {
+        return view('pages.metodepembayaran');
+    }
     /**
      * Show the form for creating a new resource.
      *

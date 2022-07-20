@@ -1,6 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    DashboardController,
+    CabangController,
+    KamarController,
+    NotifikasiController,
+    TransaksiController,
+    KontakController,
+    DashboardAdminController,
+
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -17,20 +27,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admindashboard', function (){
-    return view('pages.admin.dashboardadmin');
+Route::group(['middleware' => ['auth','roleuser:penyewa']], function() {
+    Route::resource('dashboard', DashboardController::class);
+    Route::resource('kamar', KamarController::class);
+    Route::resource('cabang', CabangController::class);
+    Route::resource('notifikasi', NotifikasiController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('kontak', KontakController::class);
+
+    Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
+    Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
 });
+
+
+Route::group(['middleware' => ['auth','roleuser:pemilik']], function() {
+    Route::resource('dashboardadmin', DashboardAdminController::class);
+    Route::resource('kamar', KamarController::class);
+    Route::resource('cabang', CabangController::class);
+    Route::resource('notifikasi', NotifikasiController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('kontak', KontakController::class);
+
+    Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
+    Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
+});
+
+
 Route::get('/kamartambah', function (){
     return view('pages.admin.kamartambah');
 });
-Route::get('/kamar', function (){
-    return view('pages.kamar');
-});
 Route::get('/kamardetail', function (){
     return view('pages.kamardetail');
-});
-Route::get('/pembayaran', function (){
-    return view('pages.pembayaran');
 });
 Route::get('/carapembayaran', function (){
     return view('pages.carapembayaran');
@@ -38,11 +65,5 @@ Route::get('/carapembayaran', function (){
 Route::get('/metodepembayaran', function (){
     return view('pages.metodepembayaran');
 });
-Route::get('/kontak', function (){
-    return view('pages.kontak');
-});
-Route::get('/dashboard', function () {
-    return view('pages.dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
