@@ -203,6 +203,7 @@
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             {{-- Pemilik Menu Mobile --}}
+            @if (Auth::user()->hasRole('pemilik') )
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('dashboardadmin.index')" :active="request()->routeIs('dashboard.*')">
                     {{ __('Dashboard') }}
@@ -216,10 +217,12 @@
                 <span
                     class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-blue-600 rounded-full">99</span>
             </div>
+            @endif
             {{-- End Pemilik Menu Mobile --}}
 
 
             {{-- Penyewa menu Mobile --}}
+            @if (Auth::user()->hasRole('penyewa') )
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.*')">
                     {{ __('Dashboard') }}
@@ -233,6 +236,7 @@
                 <span
                     class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-blue-600 rounded-full">99</span>
             </div>
+            @endif
             {{-- End Penyewa menu Mobile --}}
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200">

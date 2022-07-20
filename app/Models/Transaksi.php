@@ -19,4 +19,8 @@ class Transaksi extends Model
     {
         return $this->belongsTo('App\Models\User', 'users_id', 'id');
     }
+    public function notifikasis()
+    {
+        return $this->hasOne('App\Models\Transaksi', 'transaksis_id');
+    }
 }
