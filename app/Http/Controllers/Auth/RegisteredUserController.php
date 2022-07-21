@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -34,16 +35,25 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|confirmed',
+            'nohp' => 'required',
+            'ktp' => 'required|image|mimes:jpeg,jpg,png|max:5000',
         ]);
+
+        $namaFileKtp = $request->name . '.' . $request->ktp->extension(); 
+        $request->file('ktp')->storeAs('ktp', $namaFileKtp, 'public');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'nohp' => $request->nohp,
+            'ktp' => $namaFileKtp,
+            'role' => 'penyewa'
         ]);
+        // dd($request->all());
 
         event(new Registered($user));
 

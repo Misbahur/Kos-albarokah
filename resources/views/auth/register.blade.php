@@ -21,7 +21,7 @@
                                     <!-- Validation Errors -->
                                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                                    <form method="POST" action="{{ route('register') }}">
+                                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                         @csrf
 
                                         <!-- Name -->
@@ -38,7 +38,7 @@
                                                     </svg>
                                                 </x-slot>
                                                 <x-slot name="input">
-                                                    <input type="text" name="nama" id="nama"
+                                                    <input type="text" name="name" id="name"
                                                         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full"
                                                         placeholder="Mr.xxxx">
                                                 </x-slot>
@@ -107,9 +107,9 @@
                                             </x-auth-form>
                                         </div>
 
-                                        <!-- telp -->
+                                        <!-- nohp -->
                                         <div class="mt-4">
-                                            <x-label for="telp" :value="__('No. Hp')" />
+                                            <x-label for="nohp" :value="__('No. Hp')" />
 
                                             <x-auth-form>
                                                 <x-slot name="icon">
@@ -118,7 +118,7 @@
 </svg>
                                                 </x-slot>
                                                 <x-slot name="input">
-                                                    <input type="text" name="telp" id="telp"
+                                                    <input type="text" name="nohp" id="nohp"
                                                         class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
                                                 </x-slot>
                                             </x-auth-form>
@@ -128,7 +128,7 @@
                                             <x-label class="mb-2" for="ktp" :value="__('KTP')" />
 
                                             <span class="sr-only">Choose File</span>
-                                            <input type="file"
+                                            <input type="file" name="ktp" id="ktp"
                                                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
                                         </div>
 

@@ -32,7 +32,9 @@
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
+                                <x-dropdown-link href="{{  route('SettingProfile',Auth::user()->id) }}">
+                                    {{ __('Setting Profile') }}
+                                </x-dropdown-link>
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                     {{ __('Log Out') }}
@@ -61,7 +63,9 @@
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
+                                <x-dropdown-link href="{{  route('SettingProfile',Auth::user()->id) }}">
+                                    {{ __('Setting Profile') }}
+                                </x-dropdown-link>
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                     {{ __('Log Out') }}
@@ -91,7 +95,7 @@
             <div class="justify-between h-16">
                 <div class="flex">
                      <!-- Navigation Links Penyewa-->
-                    @if (Auth::user()->hasRole('penyewa') )
+                    @if (Auth::user()->role == 'penyewa')
                     <div class="py-3 relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
                             <svg class="w-6 h-7 text-gray-700" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
@@ -145,7 +149,7 @@
 
 
                     <!-- Navigation Links Pemilik-->
-                    @if (Auth::user()->hasRole('pemilik') )
+                    @if (Auth::user()->role == 'pemilik')
                     <div class="py-3 relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
                             <svg class="w-6 h-7 text-gray-700" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
