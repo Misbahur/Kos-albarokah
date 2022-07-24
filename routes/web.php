@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function(
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('kontak', KontakController::class);
     Route::get('SettingProfile/{id}', [UserController::class, 'edit'])->name('SettingProfile');
+    Route::post('updateprofile', [UserController::class, 'update'])->name('updateprofile');
 
     Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
     Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');

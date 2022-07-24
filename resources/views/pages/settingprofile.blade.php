@@ -8,7 +8,9 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <form class="space-y-8 divide-y divide-gray-200">
+            <form class="space-y-8 divide-y divide-gray-200" method="POST" action="{{ route('updateprofile') }}" enctype="multipart/form-data">
+                @csrf
+                <input name="id" type="hidden" value="{{ $user->id }}">
                 <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                     <div>
                         <div>
@@ -17,6 +19,17 @@
                         </div>
 
                         <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                            @if ($user->foto != null)
+                               <div
+                                class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                    Foto
+                                </label>
+                                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                    <img class="relative inset-0 rounded-full w-32 h-32" src="{{ asset('storage/user/'.$user->foto) }}" alt="foto sudah di update">
+                                </div>
+                            </div>
+                            @else
                             <div x-data="showImage()"
                                 class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                 <label for="foto" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Foto (jpg,png)
@@ -40,6 +53,7 @@
                                     </label>
                                 </div>
                             </div>
+                            @endif
                             <div
                                 class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                 <label for="name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"> Nama
@@ -95,6 +109,18 @@
                                 </div>
                             </div>
 
+                            @if ($user->alamat != null)
+                            <div
+                                class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                <label for="alamat" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                    Alamat </label>
+                                <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                    <textarea id="alamat" name="alamat" rows="3" placeholder="{{ $user->alamat }}"
+                                        class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                    <p class="mt-2 text-sm text-gray-500">Tulis Alamat Lengkap diri Anda.</p>
+                                </div>
+                            </div> 
+                            @else
                             <div
                                 class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                                 <label for="alamat" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
@@ -104,7 +130,8 @@
                                         class="max-w-lg shadow-sm block w-full focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border border-gray-300 rounded-md"></textarea>
                                     <p class="mt-2 text-sm text-gray-500">Tulis Alamat Lengkap diri Anda.</p>
                                 </div>
-                            </div>
+                            </div> 
+                            @endif
 
                             <div
                                 class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">

@@ -70,9 +70,44 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
+        // dd($request->all());
+        $request->validate([
+            'alamat' => 'required',
+            'name' => 'required',
+            'nohp' => 'required',
+            'jenis_kelamin' => 'required',
+        ]);
+
+         if ($request->hasFile('foto')) {
+        $path = $request->name . '.' . $request->foto->extension();
+        $request->file('foto')->storeAs('user', $path, 'public');
+        }
+        // Else add a dummy photo
+        else {
+        $path = 'Nophoto.jpg';
+        }
+
+        $user = User::find($request->id);
+        // if($request->input('password')){
+        //     $user->password = $request->input('password');
+        // }else{
+        //     unset($user->password);
+        // }
+        $user->name = $request->name;
+        $user->nohp = $request->nohp;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->alamat = $request->alamat;
+        $user->foto = $path;
+        $user->update();
+
+         if($user){
+            return redirect()->back()->with(['success' => 'Data Berhasil Terekam!']);
+        }else{
+            return redirect()->back()->with(['danger' => 'Data Tidak Terekam!']);
+        }
     }
 
     /**
