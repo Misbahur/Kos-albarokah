@@ -29,11 +29,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function() {
     Route::resource('dashboard', DashboardController::class);
-    Route::resource('kamar', KamarController::class);
-    Route::resource('cabang', CabangController::class);
-    Route::resource('notifikasi', NotifikasiController::class);
-    Route::resource('transaksi', TransaksiController::class);
-    Route::resource('kontak', KontakController::class);
+    Route::get('kamarpenyewa', [KamarController::class, 'kamarindex'])->name('kamarpenyewa');
+    Route::get('notifikasipenyewa', [NotifikasiController::class, 'notifikasiindex'])->name('notifikasipenyewa');
+    Route::get('transaksipenyewa', [TransaksiController::class, 'transaksiindex'])->name('transaksipenyewa');
+    Route::get('kontakpenyewa', [KontakController::class, 'kontakindex'])->name('kontakpenyewa');
     Route::get('SettingProfile/{id}', [UserController::class, 'edit'])->name('SettingProfile');
     Route::post('updateprofile', [UserController::class, 'update'])->name('updateprofile');
 
@@ -44,20 +43,20 @@ Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function(
 
 Route::group(['middleware' => ['auth','roleuser:pemilik']], function() {
     Route::resource('dashboardadmin', DashboardAdminController::class);
-    // Route::resource('kamar', KamarController::class);
-    // Route::resource('cabang', CabangController::class);
-    // Route::resource('notifikasi', NotifikasiController::class);
-    // Route::resource('transaksi', TransaksiController::class);
-    // Route::resource('kontak', KontakController::class);
+    Route::resource('kamar', KamarController::class);
+    Route::resource('cabang', CabangController::class);
+    Route::resource('notifikasi', NotifikasiController::class);
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('kontak', KontakController::class);
 
     // Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
     // Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
 });
 
 
-Route::get('/kamartambah', function (){
-    return view('pages.admin.kamartambah');
-});
+// Route::get('/kamartambah', function (){
+//     return view('pages.admin.kamartambah');
+// });
 Route::get('/kamardetail', function (){
     return view('pages.kamardetail');
 });

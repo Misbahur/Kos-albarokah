@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->enum('role', ['pemilik', 'penyewa'])->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

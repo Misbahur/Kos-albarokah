@@ -11,6 +11,12 @@ class KontakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function kontakindex()
+    {
+        //
+        return view('pages.kontak');
+    }
+
     public function index()
     {
         //

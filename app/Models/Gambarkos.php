@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class Notifikasi extends Model
+class Gambarkos extends Model
 {
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $guarded;
+    protected $fillable = ['kamars_id', 'gambar'];
 
-   public function transaksi()
+     public function kamar()
     {
-        return $this->belongsTo(Transaksi::class, 'transaksis_id', 'id');
+        return $this->belongsTo(Kamar::class, 'kamars_id', 'id');
     }
 }

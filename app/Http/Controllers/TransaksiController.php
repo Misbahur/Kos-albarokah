@@ -12,6 +12,12 @@ class TransaksiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function transaksiindex()
+    {
+        //
+        return view('pages.pembayaran');
+    }
+
     public function index()
     {
         //

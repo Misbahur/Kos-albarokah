@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('notifikasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksis_id')->nullable()->index('transaksi_id_fk4_idx');
+            $table->foreignId('transaksis_id')->nullable()->index('transaksis_id_fk4_idx');
             $table->date('jatuh_tempo');
             $table->enum('status', ['dibaca', 'belum']);
+            $table->softDeletes();
             $table->timestamps();
         });  
     }

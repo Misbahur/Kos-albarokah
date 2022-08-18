@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cabangs', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->enum('kategori', ['cowok', 'cewek']);
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('gambarkos', function (Blueprint $table) {
+            //
+            $table->foreign('kamars_id', 'kamars_id_fk5_idx')->references('id')->on('kamars')->onUpdate('CASCADE')->onDelete('RESTRICT');
         });
     }
 
@@ -31,6 +26,10 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cabangs');
+        Schema::table('gambarkos', function (Blueprint $table) {
+            //
+            $table->dropForeign('kamars_id_fk5_idx');
+
+        });
     }
 };

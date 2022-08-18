@@ -15,7 +15,9 @@ class CabangController extends Controller
     public function index()
     {
         //
-        return view('');
+        $cabangs =  Cabang::OrderBy('id', 'desc')->get();
+        // dd($cabangs);
+        return view('pages.admin.cabang.cabang', ['cabangs' => $cabangs]);
     }
 
     /**
@@ -26,6 +28,7 @@ class CabangController extends Controller
     public function create()
     {
         //
+        return view('pages.admin.cabang.create');
     }
 
     /**
@@ -37,6 +40,29 @@ class CabangController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all()); 
+
+        $request->validate([
+            'nama' => 'required',
+            'kategori' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
+        ]);
+
+        $cabang = new Cabang;
+        $cabang->nama = $request->nama;
+        $cabang->kategori = $request->kategori;
+        $cabang->latitude = $request->latitude;
+        $cabang->longitude = $request->longitude;
+        $cabang->save();
+
+        // $cabang = Cabang::create($request->all());
+
+        if($cabang){
+            return redirect()->route('cabang.index')->with(['success' => 'Data Berhasil Terekam!']);
+        }else{
+            return redirect()->route('cabang.index')->with(['danger' => 'Data Tidak Terekam!']);
+        }
     }
 
     /**
@@ -59,6 +85,7 @@ class CabangController extends Controller
     public function edit(Cabang $cabang)
     {
         //
+        return view('pages.admin.cabang.edit', ['cabang' => $cabang]);
     }
 
     /**
@@ -71,6 +98,17 @@ class CabangController extends Controller
     public function update(Request $request, Cabang $cabang)
     {
         //
+        $request->validate([
+            'nama' => 'required',
+            'kategori' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
+        ]);
+
+        $cabang->update($request->all());
+
+        return redirect()->route('cabang.index')
+                        ->with('success','Data Cabang updated successfully');
     }
 
     /**
@@ -82,5 +120,9 @@ class CabangController extends Controller
     public function destroy(Cabang $cabang)
     {
         //
+        $cabang->delete();
+       
+        return redirect()->route('cabang.index')
+                        ->with('success','cabang deleted successfully');
     }
 }

@@ -12,6 +12,10 @@ class NotifikasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function notifikasiindex()
+    {
+        //
+    }
     public function index()
     {
         //

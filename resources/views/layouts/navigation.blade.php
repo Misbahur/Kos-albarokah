@@ -116,7 +116,7 @@
                                     d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
                             </svg>
                         </div>
-                        <x-nav-link :href="route('kamar.index')" :active="request()->routeIs('kamar.*')">
+                        <x-nav-link :href="route('kamarpenyewa')" :active="request()->routeIs('kamarpenyewa')">
                             {{ __('Kamar') }}
                         </x-nav-link>
                     </div>
@@ -128,7 +128,7 @@
                                     d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                             </svg>
                         </div>
-                        <x-nav-link :href="route('transaksi.index')" :active="request()->routeIs('transaksi.*')">
+                        <x-nav-link :href="route('transaksipenyewa')" :active="request()->routeIs('transaksipenyewa')">
                             {{ __('Pembayaran') }}
                         </x-nav-link>
                     </div>
@@ -140,7 +140,7 @@
                                     d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                         </div>
-                        <x-nav-link :href="route('kontak.index')" :active="request()->routeIs('kontak.*')">
+                        <x-nav-link :href="route('kontakpenyewa')" :active="request()->routeIs('kontakpenyewa')">
                             {{ __('Kontak') }}
                         </x-nav-link>
                     </div>
@@ -160,6 +160,18 @@
                         </div>
                         <x-nav-link :href="route('dashboardadmin.index')" :active="request()->routeIs('dashboardadmin.*')">
                             {{ __('Home') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="py-3 relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                            <svg class="w-6 h-7 text-gray-700" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                        </div>
+                        <x-nav-link :href="route('cabang.index')" :active="request()->routeIs('cabang.*')">
+                            {{ __('Cabang') }}
                         </x-nav-link>
                     </div>
                     <div class="py-3 relative">

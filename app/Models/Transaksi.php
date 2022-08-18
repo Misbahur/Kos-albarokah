@@ -4,23 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Transaksi extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $dates = ['deleted_at'];
     protected $guraded;
 
-    public function kamars()
+    public function kamar()
     {
-        return $this->belongsTo('App\Models\Kamar', 'kamars_id', 'id');
+        return $this->belongsTo(Kamar::class, 'kamars_id', 'id');
     }
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo('App\Models\User', 'users_id', 'id');
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
-    public function notifikasis()
+    public function notifikasi()
     {
-        return $this->hasOne('App\Models\Transaksi', 'transaksis_id');
+        return $this->hasOne(Transaksi::class, 'id', 'transaksis_id');
     }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('harga');
             $table->date('tanggal_sewa');
             $table->integer('lama_sewa');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
