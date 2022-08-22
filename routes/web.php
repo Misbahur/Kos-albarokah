@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     KontakController,
     DashboardAdminController,
     UserController,
+    BankController,
 };
 
 /*
@@ -48,6 +49,7 @@ Route::group(['middleware' => ['auth','roleuser:pemilik']], function() {
     Route::resource('notifikasi', NotifikasiController::class);
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('kontak', KontakController::class);
+    Route::resource('akunbank', BankController::class);
 
     // Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
     // Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');

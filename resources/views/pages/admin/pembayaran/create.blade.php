@@ -1,24 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit Cabang Kos') }}
+            {{ __('Tambah Sewa Kamar') }}
         </h2>
     </x-slot>
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <h3 class="font-bold text-2xl">
-                Edit Cabang Kos
+                Tambah Sewa Kamar
             </h3>
             <!-- Validation Errors -->
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            <form method="POST" action="{{ route('cabang.update', $cabang->id) }}" enctype="multipart/form-data"
-                class="w-96">
+            <form method="POST" action="{{ route('transaksi.store') }}" class="w-96">
                 @csrf
-                @method('PUT')
+                <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
+                <input type="hidden" name="status" value="{{ 'disetujui' }}">
                 <div class="mt-5">
-                    <x-label for="nama" :value="__('Nama')" />
+                    <x-label for="kamars_id" :value="__('Kamar')" />
 
                     <x-input-form>
                         <x-slot name="icon">
@@ -29,14 +30,20 @@
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="text" name="nama" id="nama" value="{{ $cabang->nama }}"
-                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full"
-                                placeholder="Al Barokah 1">
+                            <select name="kamars_id" id="kamars_id"
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
+                                <option selected disabled>-- Pilih Kamar --</option>
+                                @forelse ($kamars as $item)
+                                    <option value="{{ $item->id }}">{{ $item->cabang->nama}} {{ $item->kode }}</option>
+                                @empty
+                                    <option>--Belum Ada Kamar / Kamar Penuh--</option>
+                                @endforelse
+                            </select>
                         </x-slot>
                     </x-input-form>
                 </div>
                 <div class="mt-5">
-                    <x-label for="kategori" :value="__('Kategori')" />
+                    <x-label for="tanggal_sewa" :value="__('Tanggal Sewa')" />
 
                     <x-input-form>
                         <x-slot name="icon">
@@ -47,62 +54,48 @@
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <select name="kategori" id="kategori"
+                            <input type="date" name="tanggal_sewa" id="tanggal_sewa"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
-                                <option disabled>-- Pilih Kategori --</option>
-                                @if ($cabang->kategori == 'cowok')
-                                    <option selected value="cowok">Laki - laki</option>
-                                    <option value="cewek">Perempuan</option>
-                                @else
-                                    <option value="cowok">Laki - laki</option>
-                                    <option selected value="cewek">Perempuan</option>
-                                @endif
-                            </select>
                         </x-slot>
                     </x-input-form>
                 </div>
                 <div class="mt-5">
-                    <x-label for="latitude" :value="__('Latitude')" />
+                    <x-label for="harga" :value="__('Harga Sewa')" />
 
                     <x-input-form>
                         <x-slot name="icon">
                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="text" name="latitude" id="latitude" value="{{ $cabang->latitude }}"
-                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full"
-                                placeholder="-8.299268">
+                            <input type="number" name="harga" id="harga"
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
                         </x-slot>
                     </x-input-form>
                 </div>
                 <div class="mt-5">
-                    <x-label for="longitude" :value="__('Longitude')" />
+                    <x-label for="lama_sewa" :value="__('Lama Sewa')" />
 
                     <x-input-form>
                         <x-slot name="icon">
                             <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="text" name="longitude" id="longitude" value="{{ $cabang->longitude }}"
-                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full"
-                                placeholder="114.315250">
+                            <input type="number" name="lama_sewa" id="lama_sewa"
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
                         </x-slot>
                     </x-input-form>
                 </div>
                 <div class="flex justify-between mt-5">
-                    <a href="{{ route('cabang.index') }}" class="bg-gray-300 hover:bg-gray-600 text-black hover:text-blue-300 uppercase text-center font-bold py-3 px-3 rounded-md">Cencel</a>
+                    <a href="{{ route('transaksi.index') }}"
+                        class="bg-gray-300 hover:bg-gray-600 text-black hover:text-blue-300 uppercase text-center font-bold py-3 px-3 rounded-md">Cencel</a>
                     <x-button-form class="ml-4">
                         {{ __('Submit') }}
                     </x-button-form>

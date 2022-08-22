@@ -10,7 +10,7 @@ class Transaksi extends Model
 {
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $guraded;
+    protected $fillable = ['kamars_id', 'users_id', 'banks_id', 'tanggal', 'status', 'harga', 'tanggal_sewa', 'lama_sewa'];
 
     public function kamar()
     {
@@ -24,5 +24,9 @@ class Transaksi extends Model
     public function notifikasi()
     {
         return $this->hasOne(Transaksi::class, 'id', 'transaksis_id');
+    }
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'banks_id', 'id');
     }
 }

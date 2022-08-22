@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kontak;
+
 
 class KontakController extends Controller
 {
@@ -20,7 +22,8 @@ class KontakController extends Controller
     public function index()
     {
         //
-        return view('pages.kontak');
+        $kontaks = Kontak::all();
+        return view('pages.admin.kontak.kontak', ['kontaks' => $kontaks]);
     }
 
     /**
@@ -31,6 +34,7 @@ class KontakController extends Controller
     public function create()
     {
         //
+        return view('pages.admin.kontak.create');
     }
 
     /**
@@ -42,6 +46,24 @@ class KontakController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'email' => 'required|email',
+            'nohp' => 'required',
+            'linkmaps' => 'required',
+        ]);
+        // dd($request->all());
+
+        $kontak = new Kontak;
+        $kontak->email = $request->email;
+        $kontak->nohp = $request->nohp;
+        $kontak->linkmaps = $request->linkmaps;
+        $kontak->save();
+
+        if($kontak){
+            return redirect()->route('kontak.index')->with(['success' => 'kontak Berhasil disimpan']);
+        }else{
+            return redirect()->route('kontak.index')->with(['danger' => 'Data Tidak Terekam!']);
+        }
     }
 
     /**
@@ -50,7 +72,7 @@ class KontakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Kontak $kontak)
     {
         //
     }
@@ -61,9 +83,10 @@ class KontakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kontak $kontak)
     {
         //
+        return view('pages.admin.kontak.edit', ['kontak' => $kontak]);
     }
 
     /**
@@ -73,9 +96,22 @@ class KontakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Kontak $kontak)
     {
         //
+         $request->validate([
+            'email' => 'required|email',
+            'nohp' => 'required',
+            'linkmaps' => 'required',
+        ]);
+
+        $kontak->update($request->all());
+
+        if($kontak){
+            return redirect()->route('kontak.index')->with(['success' => 'kontak Berhasil diupdate']);
+        }else{
+            return redirect()->route('kontak.index')->with(['danger' => 'Data Tidak Terekam!']);
+        }
     }
 
     /**
@@ -84,8 +120,12 @@ class KontakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kontak $kontak)
     {
         //
+          $kontak->delete();
+       
+        return redirect()->route('kontak.index')
+                        ->with('success','kontak deleted successfully');
     }
 }
