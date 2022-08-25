@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('kamars_id')->nullable()->index('kamars_id_fk2_idx');
             $table->foreignId('users_id')->nullable()->index('users_id_fk3_idx');
             $table->foreignId('banks_id')->nullable()->index('users_id_fk6_idx');
+            $table->string('noinvoice')->unique();
             $table->date('tanggal');
             $table->enum('status', ['disetujui', 'tidak']);
             $table->integer('harga');

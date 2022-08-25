@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::table('transaksis', function (Blueprint $table) {
             //
-            $table->foreign('kamars_id', 'kamars_id_fk2_idx')->references('id')->on('kamars')->onUpdate('CASCADE')->onDelete('RESTRICT');
-            $table->foreign('users_id', 'users_id_fk3_idx')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('RESTRICT');
-
+            $table->foreign('banks_id', 'banks_id_fk6_idx')->references('id')->on('banks')->onUpdate('CASCADE')->onDelete('RESTRICT');
         });
     }
 
@@ -30,8 +28,7 @@ return new class extends Migration
     {
         Schema::table('transaksis', function (Blueprint $table) {
             //
-            $table->dropForeign('kamars_id_fk2_idx');
-            $table->dropForeign('users_id_fk3_idx');
+            $table->dropForeign('banks_id_fk6_idx');
         });
     }
 };

@@ -10,7 +10,7 @@ class Transaksi extends Model
 {
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['kamars_id', 'users_id', 'banks_id', 'tanggal', 'status', 'harga', 'tanggal_sewa', 'lama_sewa'];
+    protected $fillable = ['kamars_id', 'users_id', 'banks_id', 'noinvoice', 'tanggal', 'status', 'harga', 'tanggal_sewa', 'lama_sewa'];
 
     public function kamar()
     {

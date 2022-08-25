@@ -25,7 +25,7 @@
                         <h4 class="font-semibold text-sm text-gray-600">
                             Kamar
                         </h4>
-                        <form class="py-4 px-1">
+                        <form action="" class="py-4 px-1">
                             <label for="default-search"
                                 class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
                             <div class="relative">
@@ -47,23 +47,25 @@
                         <div class="py-4 px-1">
                             <!-- This example requires Tailwind CSS v2.0+ -->
                             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
-                                <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+                                @forelse ($kamars as $item)
+                                    <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
                                     <div class="w-full flex items-center justify-between p-6 space-x-6">
                                         <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                            src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2021/09/21234309/desain-kamar-tidur-pinterest-3.jpg"
                                             alt="">
                                         <div class="flex-1 truncate">
                                             <div class="flex items-center space-x-3">
-                                                <h3 class="text-gray-900 text-sm font-medium truncate">Kos Albarokah 1
+                                                <h3 class="text-gray-900 text-sm font-medium truncate">{{ $item->cabang->nama }}
                                                 </h3>
                                             </div>
-                                            <p class="mt-1 text-gray-500 text-sm truncate">Kamar D6
+                                            <p class="mt-1 text-gray-500 text-sm truncate">Kamar {{ $item->kode }}
                                             </p>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="-mt-px flex">
-                                            <div class="flex-1 w-0 flex">
+                                            @if ($item->cabang->kategori === 'cowok')
+                                                <div class="flex-1 w-0 flex">
                                                 <a href="#"
                                                     class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-green-700 font-medium border border-transparent rounded-br-lg hover:text-green-500 bg-green-200">
                                                     <!-- Heroicon name: solid/phone -->
@@ -76,33 +78,8 @@
                                                     <span class="ml-3">Cowok</span>
                                                 </a>
                                             </div>
-                                            <div class="-ml-px w-0 flex-1 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                    <span class="ml-3">Rp. 400.000,-</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-                                    <div class="w-full flex items-center justify-between p-6 space-x-6">
-                                        <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                            alt="">
-                                        <div class="flex-1 truncate">
-                                            <div class="flex items-center space-x-3">
-                                                <h3 class="text-gray-900 text-sm font-medium truncate">Kos Albarokah 2
-                                                </h3>
-                                            </div>
-                                            <p class="mt-1 text-gray-500 text-sm truncate">Kamar B3
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="-mt-px flex">
-                                            <div class="flex-1 w-0 flex">
+                                            @else
+                                                <div class="flex-1 w-0 flex">
                                                 <a href="#"
                                                     class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-blue-700 font-medium border border-transparent rounded-br-lg hover:text-blue-500 bg-blue-200">
                                                     <!-- Heroicon name: solid/phone -->
@@ -115,17 +92,23 @@
                                                     <span class="ml-3">Cewek</span>
                                                 </a>
                                             </div>
+                                            @endif
+                                            
                                             <div class="-ml-px w-0 flex-1 flex">
                                                 <a href="#"
                                                     class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
                                                     <!-- Heroicon name: solid/phone -->
-                                                    <span class="ml-3">Rp. 400.000,-</span>
+                                                    <span class="ml-3">Rp. {{ number_format($item->harga) }}</span>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-
+                                @empty
+                                    <li class="col-span-1 bg-red-500 rounded-lg shadow divide-y divide-gray-200">
+                                    Data Kamar tidak ditemukan / Data Kamar Kosong
+                                </li>
+                                @endforelse
                                 <!-- More people... -->
                             </ul>
                         </div>

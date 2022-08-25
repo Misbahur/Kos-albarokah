@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('kamars', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cabangs_id')->nullable()->index('cabangs_id_fk1_idx');
-            $table->string('kode')->unique();
+            $table->string('kode');
             $table->double('harga');
             $table->integer('panjang');
             $table->integer('lebar');
             $table->text('deskripsi');
-            $table->enum('status', ['di','tidak']);
+            $table->enum('status', ['sudah','belum']);
             $table->softDeletes();
             $table->timestamps();
         });

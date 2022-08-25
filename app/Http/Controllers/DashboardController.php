@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kamar;
 
 class DashboardController extends Controller
 {
@@ -14,7 +15,9 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        return view('pages.dashboard');
+        $kamars = Kamar::where('status', 'belum')->paginate(5);
+        // dd($kamars);
+        return view('pages.dashboard', ['kamars' => $kamars]);
     }
 
     /**

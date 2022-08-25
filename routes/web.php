@@ -31,8 +31,12 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function() {
     Route::resource('dashboard', DashboardController::class);
     Route::get('kamarpenyewa', [KamarController::class, 'kamarindex'])->name('kamarpenyewa');
+    Route::get('kamarpenyewacari', [KamarController::class, 'kamarcari'])->name('kamarpenyewa.cari');
+    Route::get('kamarshow/{id}', [KamarController::class, 'kamarshow'])->name('kamarshow.penyewa');
     Route::get('notifikasipenyewa', [NotifikasiController::class, 'notifikasiindex'])->name('notifikasipenyewa');
     Route::get('transaksipenyewa', [TransaksiController::class, 'transaksiindex'])->name('transaksipenyewa');
+    Route::post('transaksistorepenyewa', [TransaksiController::class, 'penyewastore'])->name('transaksistorepenyewa');
+    Route::get('transaksipenyewainvoice/{id}', [TransaksiController::class, 'invoice'])->name('transaksipenyewa.invoice');
     Route::get('kontakpenyewa', [KontakController::class, 'kontakindex'])->name('kontakpenyewa');
     Route::get('SettingProfile/{id}', [UserController::class, 'edit'])->name('SettingProfile');
     Route::post('updateprofile', [UserController::class, 'update'])->name('updateprofile');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kamar;
 use App\Models\Gambarkos;
 use App\Models\Cabang;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use DB;
 
@@ -18,8 +19,37 @@ class KamarController extends Controller
     public function kamarindex()
     {
         //
-        return view('pages.kamar');
+        $cabangs = Cabang::all();
+        $kamars = Kamar::where('status', 'belum')->paginate(10);
+        // $kamars = DB::table('kamars')->join('gambarkos', 'kamars.id', '=', 'gambarkos.kamars_id')->join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
+        // ->select('kamars.*', DB::raw('gambarkos.kamars_id as kamars_id'), 'gambar', 'cabangs.*')->groupBy('gambarkos.kamars_id')->where('status', 'tidak')->paginate(10);
+
+        // dd($kamars);
+
+        return view('pages.kamar', ['cabangs' => $cabangs, 'kamars' => $kamars]);
     }
+
+    public function kamarcari(Request $request)
+    {
+        //    dd($request->kode);
+        if($request->kode){
+           $cabangs = Cabang::all();
+            $kamars = Kamar::where('kode', 'LIKE','%'.$request->kode.'%')->paginate(10); 
+        }
+        if($request->kategori){
+           $cabangs = Cabang::all();
+             $kamars= Kamar::join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
+            ->select('kamars.*', 'cabangs.*')->where('kategori', $request->kategori)->paginate(10);
+        }
+        if($request->cabang){
+            $cabangs = Cabang::all();
+             $kamars= Kamar::join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
+            ->select('kamars.*', 'cabangs.*')->where('cabangs.id', $request->cabang)->paginate(10);
+        }
+
+        return view('pages.kamarcari', ['cabangs' => $cabangs, 'kamars' => $kamars]);
+    }
+
     public function index()
     {
         //
@@ -66,7 +96,7 @@ class KamarController extends Controller
             'panjang' => $request->panjang,
             'lebar' => $request->lebar,
             'deskripsi' => $request->deskripsi,
-            'status' => 'tidak',
+            'status' => 'belum',
         ]);
 
         $lastid = Kamar::create($datakamar)->id;
@@ -103,11 +133,21 @@ class KamarController extends Controller
         $gambars = Gambarkos::where('kamars_id', $kamar->id)->get();
 
         $url_gambar =  Gambarkos::where('kamars_id', $kamar->id)->pluck('gambar')->toArray();
-
-
-       
         
         return view('pages.admin.kamar.show', ['kamar' => $kamar, 'gambars' => $gambars, 'url_gambar' => $url_gambar]);
+    }
+
+    public function kamarshow($id)
+    {
+        //
+        $kamar = Kamar::find($id);
+        // dd($kamar);
+        $banks = Bank::all();
+        $gambars = Gambarkos::where('kamars_id', $kamar->id)->get();
+
+        $url_gambar =  Gambarkos::where('kamars_id', $kamar->id)->pluck('gambar')->toArray();
+        
+        return view('pages.kamarshow', ['kamar' => $kamar, 'gambars' => $gambars, 'url_gambar' => $url_gambar, 'banks' => $banks]);
     }
 
     /**

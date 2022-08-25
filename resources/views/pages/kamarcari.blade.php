@@ -117,7 +117,6 @@
                         <div class="whitespace-nowrap border-b uppercase border-red-200 py-4 pl-4 pr-3 text-sm font-medium text-red-900 sm:pl-6 lg:pl-8 w-full">Tidak ada data</div>
                     @endforelse
                 </div>
-                {{ $kamars->links() }}
             </div>
         </div>
     </div>

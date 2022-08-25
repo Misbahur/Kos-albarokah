@@ -158,7 +158,7 @@
                     </div>
                 </div>
                 <div class="sm:items-start sm:pt-5">
-                    <x-label for="deskripsi" :value="__('Foto Kamar (min 4 max 6)')" />
+                    <x-label for="deskripsi" :value="__('Foto Kamar (min 2 max 4)')" />
                     <span class="sr-only">Upload File</span>
                     <x-input-form>
                         <x-slot name="icon">

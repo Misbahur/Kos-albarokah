@@ -6,215 +6,119 @@
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl flex justify-between mx-auto sm:px-6 lg:px-8">
-            <div class="w-6/8 pr-2">
-                <h3 class="text-md text-gray-600 bg-yellow-400">
-                    Selesaikan Pembayaran Anda!
-                </h3>
-                <div class="bg-white shadow-md pt-10 flex items-center justify-between">
-                    <div class="text-xl px-12 font-bold">
-                        <h1 class="text-3xl text-blue-800">
-                            INVOICE
-                        </h1>
-                        <h3 class="text-xl text-blue-800">
-                            #258942
-                        </h3>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="sm:flex sm:items-center">
+                    <div class="sm:flex-auto">
+                        <h1 class="text-xl font-semibold text-gray-900">Pembayaran</h1>
+                        <p class="mt-2 text-sm text-gray-700">Pembayaran atau Tagihan Anda Akan Di tampilkan Di bawah
+                            ini.</p>
                     </div>
-                    <div class="text-md px-12 font-bold">
-                        <h4 class="text-md text-gray-400">
-                            Tanggal : 23-12-2022
-                        </h4>
-                        <h4 class="text-md text-gray-400">
-                            Tenggat Waktu : 23-01-2023
-                        </h4>
-                    </div>
+                    {{-- <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+                        <button type="button"
+                            class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">Export</button>
+                    </div> --}}
                 </div>
-                <div class="bg-white shadow-md pt-10 flex items-center justify-between">
-                    <div class="text-xl px-12 font-bold">
-                        <h2 class="text-xl text-gray-500">
-                            Dari
-                        </h2>
-                        <h1 class="pt-4 text-3xl text-black">
-                            Ledy Intan
-                        </h1>
-                        <h4 class="pt-6 text-md text-gray-400">
-                            Perempuan
-                        </h4>
-                        <h4 class="ext-md text-gray-400">
-                            Tegaldelimo, Banyuwangi
-                        </h4>
-                    </div>
-                    <div class="text-xl px-12 font-bold">
-                         <h2 class="text-xl text-gray-500">
-                            Kepada
-                        </h2>
-                        <h1 class="pt-4 text-3xl text-black">
-                            Kos Al-Barokah
-                        </h1>
-                        <h4 class="pt-6 text-md text-gray-400">
-                            Kost
-                        </h4>
-                        <h4 class="ext-md text-gray-400">
-                            Karangbendo, Kec. Rogojampi
-                        </h4>
-                    </div>
-                </div>
+                <div class="mt-8 flex flex-col">
+                    <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-300">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col"
+                                                class="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+                                                Nomer Invoice</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Tanggal Transaksi</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Tanggal Sewa</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Kamar</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Harga</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Lama Sewa</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Bank Tujuan</th>
+                                            <th scope="col"
+                                                class="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                Status Transaksi</th>
+                                            <th scope="col" class="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-6">
+                                                <span class="sr-only">Edit</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200 bg-white">
+                                        @forelse($pembayarans as $item)
+                                            <tr>
+                                                <td
+                                                    class="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-6">
+                                                    {{ $item->noinvoice }}</td>
+                                                <td
+                                                    class="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
+                                                    {{ $item->tanggal }}</td>
+                                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                                                    {{ $item->tanggal_sewa }}</td>
+                                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                                    {{ $item->kamar->kode }}</td>
+                                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                                    {{ number_format($item->harga) }}</td>
+                                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                                    {{ $item->lama_sewa }} Bulan</td>
+                                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                                    {{ $item->bank->bank }} - {{ $item->bank->norek }}</td>
+                                                <td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                                    {{ $item->status }}</td>
+                                                <td
+                                                    class="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                    <div class="flex justify-between">
+                                                        <a class="text-blue-600 hover:text-blue-900"
+                                                            href="{{ route('transaksipenyewa.invoice', $item->id) }}" target="_blank">
+                                                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                                                            </svg>
 
-                <div class="bg-white shadow-md pt-16 px-12 grid grid-cols-3 justify-center gap-6">
-                    <div class="text-2xl font-semibold text-blue-800">
-                        JUMLAH
-                    </div>
-                    <div class="text-2xl font-semibold text-blue-800">
-                        NAMA KOST
-                    </div>
-                    <div class="text-2xl font-semibold text-blue-800 justify-self-end">
-                        BIAYA
-                    </div>
-                    <div class="text-2xl font-semibold text-gray-800">
-                        1
-                    </div>
-                    <div class="text-2xl font-semibold text-gray-800">
-                        Kamar Kost B.2
-                    </div>
-                    <div class="text-2xl font-semibold text-gray-800 justify-self-end">
-                        Rp. 500.000
-                    </div>
-                </div>
-
-                <div class="pt-32 bg-white shadow-md border-b-2">
-
-                </div>
-                <div class="flex items-center px-12 py-6 justify-between bg-white shadow-md font-bold">
-                    <h3 class="text-2xl text-blue-800">
-                            Total
-                        </h3>
-                        <h3 class="text-2xl text-blue-800">
-                            Rp. 500.000
-                        </h3>
-                </div>
-                <div class="flex items-center px-12 py-10 justify-center bg-white shadow-md font-bold">
-                    <a class="py-2 px-8 bg-blue-100 text-blue-800 rounded-md" href="">PRINT</a>
-                    <div class="px-4"></div>
-                    <a class="py-2 px-8 bg-blue-100 text-blue-800 rounded-md" href="">BAYAR</a>
-                </div>
-        </div>
-        <div class="w-2/8">
-            <div class="w-2/8 bg-gray-200">
-                <div class="w-full overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-gray-200">
-                        <h4 class="font-semibold text-sm text-gray-600">
-                            Kamar
-                        </h4>
-                        <form class="py-4 px-1">
-                            <label for="default-search"
-                                class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
-                            <div class="relative">
-                                <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                </div>
-                                <input type="search" id="default-search"
-                                    class="block p-2 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-                                    placeholder="Cari Kos, Cowok Cewek..." required>
-                                <button type="submit"
-                                    class="text-white absolute right-2 bottom-1 bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1">Search</button>
+                                                        </a>
+                                                        <a href="{{ route('kamar.edit', $item->id) }}" 
+                                                            class="text-yellow-600 hover:text-yellow-900">
+                                                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                                                                fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                                            </svg>
+                                                            Upload Bukti Bayar
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="9"
+                                                    class="whitespace-nowrap border-b uppercase border-red-200 py-4 pl-4 pr-3 text-sm font-medium text-red-900 sm:pl-6 lg:pl-8">
+                                                    Tidak ada Tagihan Atau Pembayaran Silahkan Lakukan Sewa Kamar
+                                                    Terlebih Dahulu</td>
+                                            </tr>
+                                        @endforelse
+                                        <!-- More transactions... -->
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
-
-                        <div class="py-4 px-1">
-                            <!-- This example requires Tailwind CSS v2.0+ -->
-                            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
-                                <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-                                    <div class="w-full flex items-center justify-between p-6 space-x-6">
-                                        <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                            alt="">
-                                        <div class="flex-1 truncate">
-                                            <div class="flex items-center space-x-3">
-                                                <h3 class="text-gray-900 text-sm font-medium truncate">Kos Albarokah 1
-                                                </h3>
-                                            </div>
-                                            <p class="mt-1 text-gray-500 text-sm truncate">Kamar D6
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="-mt-px flex">
-                                            <div class="flex-1 w-0 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-green-700 font-medium border border-transparent rounded-br-lg hover:text-green-500 bg-green-200">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                    <svg class="w-5 h-5 text-green-400"
-                                                        xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                                    </svg>
-                                                    <span class="ml-3">Cowok</span>
-                                                </a>
-                                            </div>
-                                            <div class="-ml-px w-0 flex-1 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                    <span class="ml-3">Rp. 400.000,-</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-                                    <div class="w-full flex items-center justify-between p-6 space-x-6">
-                                        <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                            alt="">
-                                        <div class="flex-1 truncate">
-                                            <div class="flex items-center space-x-3">
-                                                <h3 class="text-gray-900 text-sm font-medium truncate">Kos Albarokah 2
-                                                </h3>
-                                            </div>
-                                            <p class="mt-1 text-gray-500 text-sm truncate">Kamar B3
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="-mt-px flex">
-                                            <div class="flex-1 w-0 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-blue-700 font-medium border border-transparent rounded-br-lg hover:text-blue-500 bg-blue-200">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                   <svg class="w-5 h-5 text-blue-400"
-                                                        xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                    </svg>
-                                                    <span class="ml-3">Cewek</span>
-                                                </a>
-                                            </div>
-                                            <div class="-ml-px w-0 flex-1 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                    <span class="ml-3">Rp. 400.000,-</span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <!-- More people... -->
-                            </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        </div>
-        
     </div>
 </x-app-layout>
