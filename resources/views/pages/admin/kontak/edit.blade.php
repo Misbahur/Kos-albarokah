@@ -65,7 +65,7 @@
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="text" name="linkmaps" id="linkmaps"  value="{{ $kontak->linkmaps }}"
+                            <input type="text" name="linkmaps" id="linkmaps"  value="{{ $kontak->linkmapss }}"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full"
                                 placeholder="link maps">
                         </x-slot>

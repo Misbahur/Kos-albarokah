@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('buktitf')->nullable();
             $table->date('tanggal_sewa');
             $table->integer('lama_sewa');
+            $table->date('jatuh_tempo');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Transaksi;
 use App\Models\Bank;
 use App\Models\Kamar;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Mail;
+use App\Mail\ValidasiMail;
+use App\Mail\ReminderMail;
 
 class TransaksiController extends Controller
 {
@@ -48,9 +53,10 @@ class TransaksiController extends Controller
     public function create()
     {
         //
+        $users = User::where('role', 'penyewa')->get();
         $kamars = Kamar::where('status', 'tidak')->get();
 
-        return view('pages.admin.pembayaran.create', ['kamars' => $kamars]);
+        return view('pages.admin.pembayaran.create', ['kamars' => $kamars, 'users' => $users]);
     }
 
     /**
@@ -85,6 +91,7 @@ class TransaksiController extends Controller
         $offline->harga = $request->harga*$request->lama_sewa;
         $offline->tanggal_sewa = $request->tanggal_sewa;
         $offline->lama_sewa = $request->lama_sewa;
+        $offline->jatuh_tempo = Carbon::parse($request->tanggal_sewa)->addMonth($request->lama_sewa)->format('Y-m-d');
         $offline->save();
 
         if($offline){
@@ -127,12 +134,34 @@ class TransaksiController extends Controller
         $online->harga = $request->harga*$request->lama_sewa;
         $online->tanggal_sewa = $request->tanggal_sewa;
         $online->lama_sewa = $request->lama_sewa;
+        $online->jatuh_tempo = Carbon::parse($request->tanggal_sewa)->addMonth($request->lama_sewa)->format('Y-m-d');
         $online->save();
 
         if($online){
             return redirect()->route('transaksipenyewa')->with(['success' => 'Transaksi Kamar Berhasil Terekam!']);
         }else{
             return redirect()->route('transaksipenyewa')->with(['danger' => 'Transaksi Kamar Tidak Terekam!']);
+        }
+    }
+
+    public function buktipenyewa(Request $request, Transaksi $transaksi){
+        // dd($request->all());
+
+        $request->validate([
+            'bukti' => 'required',
+        ]);
+
+        $path = date('Ymd').$request->nama . '.' . $request->bukti->extension();
+        $request->file('bukti')->storeAs('buktibayar', $path, 'public');
+
+        $bukti = Transaksi::find($request->id);
+        $bukti->buktitf = $path;
+        $bukti->update();
+
+        if($bukti){
+            return redirect()->back()->with(['success' => 'Data Berhasil Terekam!']);
+        }else{
+            return redirect()->back()->with(['danger' => 'Data Tidak Terekam!']);
         }
     }
 
@@ -146,10 +175,14 @@ class TransaksiController extends Controller
             'namapenyewa' => $invoice->user->name,
             'jkpenyewa' => $invoice->user->jenis_kelamin,
             'alamatpenyewa' => $invoice->user->alamat,
+            'lamasewa' => $invoice->lama_sewa,
+            'kodekost' => $invoice->kamar->kode,
+            'harga' => $invoice->harga,
+            'cabang' => $invoice->kamar->cabang->nama
         ];
         
         
-        $pdf = PDF::loadView('pages.invoice', $data)->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('pages.invoice', $data);
 
         return $pdf->stream('invoice'.Auth::user()->name.'.pdf');
     }
@@ -163,6 +196,37 @@ class TransaksiController extends Controller
     public function show(Transaksi $transaksi)
     {
         //
+        return view('pages.admin.pembayaran.detail', ['transaksi' => $transaksi]);
+    }
+
+    public function validasi(Request $request, Transaksi $transaksi)
+    {
+        // dd($request->all());
+
+        $validasi = Transaksi::find($request->id);
+        $validasi->status = $request->status;
+        $validasi->update();
+
+        $mailData  = [
+            'noinvoice' => $validasi->noinvoice,
+            'tanggaltransaksi' => $validasi->tanggal,
+            'tanggalsewa' => $validasi->tanggal_sewa,
+            'namapenyewa' => $validasi->user->name,
+            'jkpenyewa' => $validasi->user->jenis_kelamin,
+            'alamatpenyewa' => $validasi->user->alamat,
+            'lamasewa' => $validasi->lama_sewa,
+            'kodekost' => $validasi->kamar->kode,
+            'harga' => $validasi->harga,
+            'cabang' => $validasi->kamar->cabang->nama
+        ];
+
+        Mail::to($validasi->user->email)->send(new ValidasiMail($mailData));
+
+        if($validasi){
+            return redirect()->route('transaksi.index')->with(['success' => 'Transaksi Kamar Berhasil Terekam!']);
+        }else{
+            return redirect()->route('transaksi.index')->with(['danger' => 'Transaksi Kamar Tidak Terekam!']);
+        }
     }
 
     /**
@@ -174,6 +238,9 @@ class TransaksiController extends Controller
     public function edit(Transaksi $transaksi)
     {
         //
+        $users = User::where('role', 'penyewa')->get();
+        $kamars = Kamar::where('status', 'tidak')->get();
+        return view('pages.admin.pembayaran.edit', ['transaksi' => $transaksi, 'kamars' => $kamars, 'users' => $users]);
     }
 
     /**
@@ -186,6 +253,23 @@ class TransaksiController extends Controller
     public function update(Request $request, Transaksi $transaksi)
     {
         //
+        $request->validate([
+            'users_id' => 'required',
+            'kamars_id' => 'required',
+            'tanggal' => 'required|date',
+            'status' => 'required',
+            'harga' => 'required|integer',
+            'tanggal_sewa' => 'required',
+            'lama_sewa' => 'required',
+        ]);
+
+        $transaksi->update($request->all());
+
+        if($transaksi){
+            return redirect()->route('transaksi.index')->with(['success' => 'Transaksi Kamar Berhasil Terekam!']);
+        }else{
+            return redirect()->route('transaksi.index')->with(['danger' => 'Transaksi Kamar Tidak Terekam!']);
+        }
     }
 
     /**
@@ -197,5 +281,25 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         //
+        $transaksi->delete();
+
+        return redirect()->route('transaksi.index')
+                        ->with('success','Data Transaksi deleted successfully');
+    }
+
+    public function reminderpenyewa()
+    {
+        $transaksi = Transaksi::all();
+        // ->subDays(5)
+        foreach ($transaksi as $item){
+            if(Carbon::parse($item->jatuh_tempo)->subDays(3)->format('Y-m-d') === Carbon::now()->format('Y-m-d'))
+            {
+            $mailData  = [
+            'nama' => $item->user->name,
+            'jatuh_tempo' => $item->jatuh_tempo,
+            ];
+            Mail::to($item->user->email)->send(new ReminderMail($mailData));
+            }
+        }
     }
 }

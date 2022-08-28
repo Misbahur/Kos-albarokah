@@ -13,8 +13,9 @@
             <!-- Validation Errors -->
             <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            <form method="POST" action="{{ route('transaksi.store') }}" class="w-96">
+            <form method="POST" action="{{ route('transaksi.update', $transaksi->id) }}" class="w-96">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="tanggal" value="{{ date('Y-m-d') }}">
                 <input type="hidden" name="status" value="{{ 'disetujui' }}">
                 <div class="mt-5">
@@ -31,7 +32,7 @@
                         <x-slot name="input">
                             <select name="users_id" id="users_id"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
-                                <option selected disabled>-- Pilih Kamar --</option>
+                                <option selected value="{{ $transaksi->users_id }}">{{ $transaksi->user->name }}</option>
                                 @forelse ($users as $item)
                                     <option value="{{ $item->id }}">{{ $item->name}}</option>
                                 @empty
@@ -55,7 +56,7 @@
                         <x-slot name="input">
                             <select name="kamars_id" id="kamars_id"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
-                                <option selected disabled>-- Pilih Kamar --</option>
+                                <option selected value="{{ $transaksi->kamars_id }}">{{ $transaksi->kamar->cabang->nama }} - {{ $transaksi->kamar->kode }}</option>
                                 @forelse ($kamars as $item)
                                     <option value="{{ $item->id }}">{{ $item->cabang->nama}} {{ $item->kode }}</option>
                                 @empty
@@ -77,7 +78,7 @@
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="date" name="tanggal_sewa" id="tanggal_sewa"
+                            <input type="date" name="tanggal_sewa" id="tanggal_sewa" value="{{ $transaksi->tanggal_sewa }}"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
                         </x-slot>
                     </x-input-form>
@@ -94,7 +95,7 @@
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="number" name="harga" id="harga"
+                            <input type="number" name="harga" id="harga" value="{{ $transaksi->harga }}"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
                         </x-slot>
                     </x-input-form>
@@ -111,7 +112,24 @@
                             </svg>
                         </x-slot>
                         <x-slot name="input">
-                            <input type="number" name="lama_sewa" id="lama_sewa"
+                            <input type="number" name="lama_sewa" id="lama_sewa" value="{{ $transaksi->lama_sewa }}"
+                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
+                        </x-slot>
+                    </x-input-form>
+                </div>
+                <div class="mt-5">
+                    <x-label for="jatuh_tempo" :value="__('Jatuh Tempo')" />
+
+                    <x-input-form>
+                        <x-slot name="icon">
+                            <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </x-slot>
+                        <x-slot name="input">
+                            <input type="text" name="jatuh_tempo" id="jatuh_tempo" value="{{ $transaksi->jatuh_tempo }}"
                                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
                         </x-slot>
                     </x-input-form>

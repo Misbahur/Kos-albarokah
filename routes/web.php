@@ -28,6 +28,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// Route::get('/coba', function () {
+//     return view('pages.coba');
+// });
+
+// Route::get('/invoice', function () {
+//     return view('pages.invoice');
+// });
+
+Route::get('reminderpenyewa', [TransaksiController::class, 'reminderpenyewa']);
+
 Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function() {
     Route::resource('dashboard', DashboardController::class);
     Route::get('kamarpenyewa', [KamarController::class, 'kamarindex'])->name('kamarpenyewa');
@@ -37,11 +48,11 @@ Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function(
     Route::get('transaksipenyewa', [TransaksiController::class, 'transaksiindex'])->name('transaksipenyewa');
     Route::post('transaksistorepenyewa', [TransaksiController::class, 'penyewastore'])->name('transaksistorepenyewa');
     Route::get('transaksipenyewainvoice/{id}', [TransaksiController::class, 'invoice'])->name('transaksipenyewa.invoice');
+    Route::post('uploadbukti', [TransaksiController::class, 'buktipenyewa'])->name('uploadbukti.penyewa');
     Route::get('kontakpenyewa', [KontakController::class, 'kontakindex'])->name('kontakpenyewa');
     Route::get('SettingProfile/{id}', [UserController::class, 'edit'])->name('SettingProfile');
     Route::post('updateprofile', [UserController::class, 'update'])->name('updateprofile');
 
-    Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
     Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
 });
 
@@ -54,6 +65,7 @@ Route::group(['middleware' => ['auth','roleuser:pemilik']], function() {
     Route::resource('transaksi', TransaksiController::class);
     Route::resource('kontak', KontakController::class);
     Route::resource('akunbank', BankController::class);
+    Route::post('validasitransaksi', [TransaksiController::class, 'validasi'])->name('transaksi.validasi');
 
     // Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');
     // Route::get('carabayar', [TransaksiController::class, 'carabayar'])->name('transaksi.carabayar');

@@ -174,13 +174,13 @@
                                                         class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                                         <form class="flex justify-between"
                                                             onsubmit="return confirm('Apakah Anda Yakin Ingin Menghapus cabang ini \nAkun ini akan dihapus Permanen ?');"
-                                                            action="{{ route('kamar.destroy', $item->id) }}"
+                                                            action="{{ route('transaksi.destroy', $item->id) }}"
                                                             {{-- "{{ route('cabang.destroy',$cabang->id) }}"
                                                             --}} method="post">
                                                             @csrf
                                                             @method('DELETE')
                                                             <a class="text-blue-600 hover:text-blue-900"
-                                                                href="{{ route('kamar.show', $item->id) }}">
+                                                                href="{{ route('transaksi.show', $item->id) }}">
                                                                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
                                                                     class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                                                     stroke="currentColor" stroke-width="2">
@@ -190,7 +190,7 @@
                                                                         d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                                 </svg>
                                                             </a>
-                                                            <a href="{{ route('kamar.edit', $item->id) }}"
+                                                            <a href="{{ route('transaksi.edit', $item->id) }}"
                                                                 class="text-yellow-600 hover:text-yellow-900"><svg
                                                                     class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
                                                                     fill="none" viewBox="0 0 24 24"
