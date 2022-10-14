@@ -88,6 +88,28 @@
                         </div>
 
                         <div class="sm:items-start sm:pt-5">
+                            <x-label for="status" :value="__('Status Kamar')" />
+                            <x-input-form>
+                                <x-slot name="icon">
+                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                                    </svg>
+                                </x-slot>
+                                <x-slot name="input">
+                                    <select name="status" id="status"
+                                        class="max-w-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
+                                        <option selected value="{{ $kamar->status}}">{{ $kamar->status }}</option>
+                                            <option value="belum">Belum</option>
+                                            <option value="sudah">Sudah</option>
+                                    </select>
+                                </x-slot>
+                            </x-input-form>
+                        </div>
+
+                        <div class="sm:items-start sm:pt-5">
                             <x-label for="panjang" :value="__('Panjang Kamar')" />
                             <x-input-form>
                                 <x-slot name="icon">
@@ -177,7 +199,7 @@
                 </div>
                 <div class="block right-0">
                     <div class="flex justify-center mt-5">
-                        <a href="{{ route('cabang.index') }}"
+                        <a href="{{ route('kamar.index') }}"
                             class="bg-gray-300 hover:bg-gray-600 text-black hover:text-blue-300 uppercase text-center font-bold py-3 px-3 rounded-md">Cencel</a>
                         <x-button-form class="ml-4">
                             {{ __('Submit') }}

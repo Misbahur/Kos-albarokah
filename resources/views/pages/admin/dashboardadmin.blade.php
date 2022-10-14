@@ -265,67 +265,49 @@
                                         <tbody>
                                             <tr>
                                                 <td class="relative py-4 pl-4 sm:pl-6 pr-3 text-sm">
-                                                    <div class="font-medium text-gray-900">Hobby</div>
+                                                    <div class="font-medium text-gray-900">Roby</div>
                                                     <div class="mt-1 flex flex-col text-gray-500 sm:block lg:hidden">
-                                                        <span>4 GB RAM / 4 CPUs</span>
+                                                        <span>Reguler</span>
                                                         <span class="hidden sm:inline"> · </span>
-                                                        <span>128 GB SSD disk</span>
+                                                        <span>Bulan</span>
                                                     </div>
                                                 </td>
-                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">4 GB
-                                                    RAM</td>
-                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">4
-                                                    CPUs</td>
-                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">128
-                                                    GB SSD disk</td>
+                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">Albarokah 1 p3</td>
+                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">Bulan</td>
+                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">Rp. 400.000</td>
                                                 <td class="px-3 py-3.5 text-sm text-gray-500">
-                                                    <div class="sm:hidden">$40/mo</div>
-                                                    <div class="hidden sm:block">$40/month</div>
+                                                    <div class="sm:hidden">Lunas</div>
+                                                    <div class="hidden sm:block">Lunas</div>
                                                 </td>
                                                 <td
                                                     class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right text-sm font-medium">
                                                     <button type="button"
                                                         class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Select<span
-                                                            class="sr-only">, Hobby</span></button>
+                                                            class="sr-only">, Roby</span></button>
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td
-                                                    class="relative py-4 pl-4 sm:pl-6 pr-3 text-sm border-t border-transparent">
-                                                    <div class="font-medium text-gray-900">
-                                                        Startup
-
-                                                        <span class="text-indigo-600">(Current Plan)</span>
-                                                    </div>
+                                                <td class="relative py-4 pl-4 sm:pl-6 pr-3 text-sm">
+                                                    <div class="font-medium text-gray-900">Hany</div>
                                                     <div class="mt-1 flex flex-col text-gray-500 sm:block lg:hidden">
-                                                        <span>8 GB RAM / 6 CPUs</span>
+                                                        <span>Reguler</span>
                                                         <span class="hidden sm:inline"> · </span>
-                                                        <span>256 GB SSD disk</span>
+                                                        <span>Bulan</span>
                                                     </div>
-
-                                                    <div class="absolute right-0 left-6 -top-px h-px bg-gray-200"></div>
+                                                </td>
+                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">Albarokah 3 D12</td>
+                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">Bulan</td>
+                                                <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">Rp. 450.000</td>
+                                                <td class="px-3 py-3.5 text-sm text-gray-500">
+                                                    <div class="sm:hidden">Lunas</div>
+                                                    <div class="hidden sm:block">Lunas</div>
                                                 </td>
                                                 <td
-                                                    class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell border-t border-gray-200">
-                                                    8 GB RAM</td>
-                                                <td
-                                                    class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell border-t border-gray-200">
-                                                    6 CPUs</td>
-                                                <td
-                                                    class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell border-t border-gray-200">
-                                                    256 GB SSD disk</td>
-                                                <td class="px-3 py-3.5 text-sm text-gray-500 border-t border-gray-200">
-                                                    <div class="sm:hidden">$80/mo</div>
-                                                    <div class="hidden sm:block">$80/month</div>
-                                                </td>
-                                                <td
-                                                    class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right text-sm font-medium border-t border-transparent">
+                                                    class="relative py-3.5 pl-3 pr-4 sm:pr-6 text-right text-sm font-medium">
                                                     <button type="button"
-                                                        class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
-                                                        disabled>Select<span class="sr-only">, Startup</span></button>
-
-                                                    <div class="absolute right-6 left-0 -top-px h-px bg-gray-200"></div>
+                                                        class="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30">Select<span
+                                                            class="sr-only">, Hanyx</span></button>
                                                 </td>
                                             </tr>
 

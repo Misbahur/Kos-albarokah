@@ -159,8 +159,9 @@ class KamarController extends Controller
     public function edit(Kamar $kamar)
     {
         //
+        $kamars = Kamar::all();
         $cabangs = Cabang::all();
-        return view('pages.admin.kamar.edit', ['kamar' => $kamar, 'cabangs' => $cabangs]);
+        return view('pages.admin.kamar.edit', ['kamar' => $kamar, 'cabangs' => $cabangs, 'kamars' => $kamars]);
     }
 
     /**
@@ -188,7 +189,7 @@ class KamarController extends Controller
             'panjang' => $request->panjang,
             'lebar' => $request->lebar,
             'deskripsi' => $request->deskripsi,
-            'status' => 'tidak',
+            'status' => $request->status,
         ]);
 
         DB::table('kamars')->update($datakamar);
@@ -203,7 +204,10 @@ class KamarController extends Controller
                 $insert[$key]['kamars_id'] = $kamar->id;
             }
          }
+         if($request->hasfile('gambar'))
+         {
         Gambarkos::insert($insert);
+        }
 
          if($datakamar){
             return redirect()->route('kamar.index')->with(['success' => 'Kamar Upload successfully']);
