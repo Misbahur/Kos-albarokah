@@ -182,6 +182,8 @@ class KamarController extends Controller
             'deskripsi' => 'required',
         ]);
 
+        // $kamar = Kamar::find($id);
+
         $datakamar = ([
             'cabangs_id' => $request->cabang,
             'kode' => $request->kode,
@@ -192,7 +194,7 @@ class KamarController extends Controller
             'status' => $request->status,
         ]);
 
-        DB::table('kamars')->update($datakamar);
+        $kamar->update($request->all());
 
         if($request->hasfile('gambar'))
          {
