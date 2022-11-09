@@ -171,7 +171,7 @@
                             </svg>
                         </div>
                         <x-nav-link :href="route('cabang.index')" :active="request()->routeIs('cabang.*')">
-                            {{ __('Cabang') }}
+                            {{ __('Blok') }}
                         </x-nav-link>
                     </div>
                     <div class="py-3 relative">

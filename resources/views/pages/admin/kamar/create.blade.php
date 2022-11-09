@@ -45,7 +45,7 @@
                     class="items-center grid grid-cols-1 gap-8 md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2">
                     <div>
                         <div class="sm:items-start sm:pt-5">
-                            <x-label for="cabang" :value="__('Cabang')" />
+                            <x-label for="cabang" :value="__('Blok')" />
                             <x-input-form>
                                 <x-slot name="icon">
                                     <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -58,11 +58,11 @@
                                 <x-slot name="input">
                                     <select name="cabang" id="cabang"
                                         class="max-w-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-full">
-                                        <option selected disabled>-- Pilih Cabang Kosan --</option>
+                                        <option selected disabled>-- Pilih Blok Kosan --</option>
                                         @forelse ($cabangs as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                         @empty
-                                            <option value="">Harap Tambah Cabang Terlebih Dahulu</option>
+                                            <option value="">Harap Tambah Blok Terlebih Dahulu</option>
                                         @endforelse
                                     </select>
                                 </x-slot>
