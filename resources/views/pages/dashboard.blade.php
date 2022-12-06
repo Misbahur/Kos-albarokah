@@ -15,7 +15,8 @@
                         </h3>
                     </div>
                     <div class="py-4 pr-10">
-                        <img class="inline rounded-md" src="https://bisniz.id/wp-content/uploads/2022/04/Bisnis-Kos-kosan.jpg" alt="">
+                        <img class="inline rounded-md"
+                            src="https://bisniz.id/wp-content/uploads/2022/04/Bisnis-Kos-kosan.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -49,65 +50,69 @@
                             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-1">
                                 @forelse ($kamars as $item)
                                     <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-                                    <div class="w-full flex items-center justify-between p-6 space-x-6">
-                                        <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
-                                            src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2021/09/21234309/desain-kamar-tidur-pinterest-3.jpg"
-                                            alt="">
-                                        <div class="flex-1 truncate">
-                                            <div class="flex items-center space-x-3">
-                                                <h3 class="text-gray-900 text-sm font-medium truncate">{{ $item->cabang->nama }}
-                                                </h3>
-                                            </div>
-                                            <p class="mt-1 text-gray-500 text-sm truncate">Kamar {{ $item->kode }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="-mt-px flex">
-                                            @if ($item->cabang->kategori === 'cowok')
-                                                <div class="flex-1 w-0 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-green-700 font-medium border border-transparent rounded-br-lg hover:text-green-500 bg-green-200">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                    <svg class="w-5 h-5 text-green-400"
-                                                        xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                                    </svg>
-                                                    <span class="ml-3">Cowok</span>
-                                                </a>
-                                            </div>
-                                            @else
-                                                <div class="flex-1 w-0 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-blue-700 font-medium border border-transparent rounded-br-lg hover:text-blue-500 bg-blue-200">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                   <svg class="w-5 h-5 text-blue-400"
-                                                        xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                    </svg>
-                                                    <span class="ml-3">Cewek</span>
-                                                </a>
-                                            </div>
-                                            @endif
-                                            
-                                            <div class="-ml-px w-0 flex-1 flex">
-                                                <a href="#"
-                                                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
-                                                    <!-- Heroicon name: solid/phone -->
-                                                    <span class="ml-3">Rp. {{ number_format($item->harga) }}</span>
-                                                </a>
+                                        <div class="w-full flex items-center justify-between p-6 space-x-6">
+                                            <img class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+                                                src="https://d3p0bla3numw14.cloudfront.net/news-content/img/2021/09/21234309/desain-kamar-tidur-pinterest-3.jpg"
+                                                alt="">
+                                            <div class="flex-1 truncate">
+                                                <div class="flex items-center space-x-3">
+                                                    <h3 class="text-gray-900 text-sm font-medium truncate">
+                                                        {{ $item->cabang->nama }}
+                                                    </h3>
+                                                </div>
+                                                <p class="mt-1 text-gray-500 text-sm truncate">Kamar {{ $item->kode }}
+                                                </p>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
+                                        <div>
+                                            <div class="-mt-px flex">
+                                                @if ($item->cabang->kategori === 'cowok')
+                                                    <div class="flex-1 w-0 flex">
+                                                        <a href="#"
+                                                            class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-green-700 font-medium border border-transparent rounded-br-lg hover:text-green-500 bg-green-200">
+                                                            <!-- Heroicon name: solid/phone -->
+                                                            <svg class="w-5 h-5 text-green-400"
+                                                                xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                                stroke-width="2">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                                                            </svg>
+                                                            <span class="ml-3">Cowok</span>
+                                                        </a>
+                                                    </div>
+                                                @else
+                                                    <div class="flex-1 w-0 flex">
+                                                        <a href="#"
+                                                            class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-blue-700 font-medium border border-transparent rounded-br-lg hover:text-blue-500 bg-blue-200">
+                                                            <!-- Heroicon name: solid/phone -->
+                                                            <svg class="w-5 h-5 text-blue-400"
+                                                                xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                                stroke-width="2">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                            </svg>
+                                                            <span class="ml-3">Cewek</span>
+                                                        </a>
+                                                    </div>
+                                                @endif
+
+                                                <div class="-ml-px w-0 flex-1 flex">
+                                                    <a href="#"
+                                                        class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500">
+                                                        <!-- Heroicon name: solid/phone -->
+                                                        <span class="ml-3">Rp.
+                                                            {{ number_format($item->harga) }}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
                                 @empty
                                     <li class="col-span-1 bg-red-500 rounded-lg shadow divide-y divide-gray-200">
-                                    Data Kamar tidak ditemukan / Data Kamar Kosong
-                                </li>
+                                        Data Kamar tidak ditemukan / Data Kamar Kosong
+                                    </li>
                                 @endforelse
                                 <!-- More people... -->
                             </ul>

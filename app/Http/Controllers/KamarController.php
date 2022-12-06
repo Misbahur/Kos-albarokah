@@ -32,19 +32,19 @@ class KamarController extends Controller
     public function kamarcari(Request $request)
     {
         //    dd($request->kode);
-        if($request->kode){
-           $cabangs = Cabang::all();
-            $kamars = Kamar::where('kode', 'LIKE','%'.$request->kode.'%')->paginate(10); 
-        }
-        if($request->kategori){
-           $cabangs = Cabang::all();
-             $kamars= Kamar::join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
-            ->select('kamars.*', 'cabangs.*')->where('kategori', $request->kategori)->paginate(10);
-        }
-        if($request->cabang){
+        if ($request->kode) {
             $cabangs = Cabang::all();
-             $kamars= Kamar::join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
-            ->select('kamars.*', 'cabangs.*')->where('cabangs.id', $request->cabang)->paginate(10);
+            $kamars = Kamar::where('kode', 'LIKE', '%' . $request->kode . '%')->paginate(10);
+        }
+        if ($request->kategori) {
+            $cabangs = Cabang::all();
+            $kamars = Kamar::join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
+                ->select('kamars.*', 'cabangs.*')->where('kategori', $request->kategori)->paginate(10);
+        }
+        if ($request->cabang) {
+            $cabangs = Cabang::all();
+            $kamars = Kamar::join('cabangs', 'kamars.cabangs_id', '=', 'cabangs.id')
+                ->select('kamars.*', 'cabangs.*')->where('cabangs.id', $request->cabang)->paginate(10);
         }
 
         return view('pages.kamarcari', ['cabangs' => $cabangs, 'kamars' => $kamars]);
@@ -101,22 +101,20 @@ class KamarController extends Controller
 
         $lastid = Kamar::create($datakamar)->id;
 
-        if($request->hasfile('gambar'))
-         {
-            foreach($request->file('gambar') as $key => $file)
-            {
+        if ($request->hasfile('gambar')) {
+            foreach ($request->file('gambar') as $key => $file) {
                 $path = $file->store('gambarkos', 'public');
                 $insert[$key]['gambar'] = $path;
                 $insert[$key]['kamars_id'] = $lastid;
             }
-         }
+        }
         Gambarkos::insert($insert);
 
         // dd($request->all());
 
-        if($datakamar){
+        if ($datakamar) {
             return redirect()->route('kamar.index')->with(['success' => 'Kamar Upload successfully']);
-        }else{
+        } else {
             return redirect()->route('kamar.index')->with(['danger' => 'Data Tidak Terekam!']);
         }
     }
@@ -133,7 +131,7 @@ class KamarController extends Controller
         $gambars = Gambarkos::where('kamars_id', $kamar->id)->get();
 
         $url_gambar =  Gambarkos::where('kamars_id', $kamar->id)->pluck('gambar')->toArray();
-        
+
         return view('pages.admin.kamar.show', ['kamar' => $kamar, 'gambars' => $gambars, 'url_gambar' => $url_gambar]);
     }
 
@@ -146,7 +144,7 @@ class KamarController extends Controller
         $gambars = Gambarkos::where('kamars_id', $kamar->id)->get();
 
         $url_gambar =  Gambarkos::where('kamars_id', $kamar->id)->pluck('gambar')->toArray();
-        
+
         return view('pages.kamarshow', ['kamar' => $kamar, 'gambars' => $gambars, 'url_gambar' => $url_gambar, 'banks' => $banks]);
     }
 
@@ -196,24 +194,21 @@ class KamarController extends Controller
 
         $kamar->update($request->all());
 
-        if($request->hasfile('gambar'))
-         {
+        if ($request->hasfile('gambar')) {
             Gambarkos::where('kamars_id', $kamar->id)->delete();
-            foreach($request->file('gambar') as $key => $file)
-            {
+            foreach ($request->file('gambar') as $key => $file) {
                 $path = $file->store('gambarkos', 'public');
                 $insert[$key]['gambar'] = $path;
                 $insert[$key]['kamars_id'] = $kamar->id;
             }
-         }
-         if($request->hasfile('gambar'))
-         {
-        Gambarkos::insert($insert);
+        }
+        if ($request->hasfile('gambar')) {
+            Gambarkos::insert($insert);
         }
 
-         if($datakamar){
+        if ($datakamar) {
             return redirect()->route('kamar.index')->with(['success' => 'Kamar Upload successfully']);
-        }else{
+        } else {
             return redirect()->route('kamar.index')->with(['danger' => 'Data Tidak Terekam!']);
         }
     }
@@ -229,6 +224,6 @@ class KamarController extends Controller
         //
         $kamar->delete();
         return redirect()->route('kamar.index')
-                        ->with('success','cabang deleted successfully');
+            ->with('success', 'cabang deleted successfully');
     }
 }

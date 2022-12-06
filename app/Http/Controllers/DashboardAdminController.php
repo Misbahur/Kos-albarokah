@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardAdminController extends Controller
 {
@@ -13,8 +16,31 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.admin.dashboardadmin');
+        $pemasukan_mingguan = Transaksi::where('status', 'disetujui')->whereBetween('tanggal', [
+            Carbon::parse('last monday')->startOfDay(),
+            Carbon::parse('next friday')->endOfDay(),
+        ])->sum('harga');
+        $transaksi_last_week = Transaksi::where('status', 'disetujui')->whereBetween('tanggal', [
+            Carbon::parse('last monday')->startOfDay(),
+            Carbon::parse('next friday')->endOfDay(),
+        ])->get();
+        $pemasukan_bulanan =  Transaksi::where('status', 'disetujui')->whereMonth('tanggal', date('m'))->sum('harga');
+        $pemasukan_tahunan =  Transaksi::where('status', 'disetujui')->whereYear('tanggal', date('Y'))->sum('harga');
+        $penghuni_kos = Transaksi::paginate(10);
+        $pemasukan_perbulan = DB::table('transaksis')
+            ->select(
+                DB::raw('MONTHNAME(tanggal) as bulan'),
+                DB::raw('SUM(harga) as pemasukan')
+            )
+            ->groupBy('bulan')
+            ->get();;
+        $bulan = [];
+        $pemasukan = [];
+        foreach ($pemasukan_perbulan as $key => $data) {
+            $bulan[] = $data->bulan;
+            $pemasukan[] = $data->pemasukan;
+        }
+        return view('pages.admin.dashboardadmin', compact('pemasukan_mingguan', 'pemasukan_bulanan', 'pemasukan_tahunan', 'bulan', 'pemasukan', 'transaksi_last_week', 'penghuni_kos'));
     }
 
     /**

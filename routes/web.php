@@ -39,7 +39,7 @@ Route::get('/', function () {
 
 Route::get('reminderpenyewa', [TransaksiController::class, 'reminderpenyewa']);
 
-Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function() {
+Route::group(['middleware' => ['auth', 'roleuser:penyewa', 'verified']], function () {
     Route::resource('dashboard', DashboardController::class);
     Route::get('kamarpenyewa', [KamarController::class, 'kamarindex'])->name('kamarpenyewa');
     Route::get('kamarpenyewacari', [KamarController::class, 'kamarcari'])->name('kamarpenyewa.cari');
@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth','roleuser:penyewa','verified']], function(
 });
 
 
-Route::group(['middleware' => ['auth','roleuser:pemilik']], function() {
+Route::group(['middleware' => ['auth', 'roleuser:pemilik']], function () {
     Route::resource('dashboardadmin', DashboardAdminController::class);
     Route::resource('kamar', KamarController::class);
     Route::resource('cabang', CabangController::class);
@@ -75,14 +75,14 @@ Route::group(['middleware' => ['auth','roleuser:pemilik']], function() {
 // Route::get('/kamartambah', function (){
 //     return view('pages.admin.kamartambah');
 // });
-Route::get('/kamardetail', function (){
+Route::get('/kamardetail', function () {
     return view('pages.kamardetail');
 });
-Route::get('/carapembayaran', function (){
+Route::get('/carapembayaran', function () {
     return view('pages.carapembayaran');
 });
-Route::get('/metodepembayaran', function (){
+Route::get('/metodepembayaran', function () {
     return view('pages.metodepembayaran');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
